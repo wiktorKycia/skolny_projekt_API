@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Generator losowych żartów</h1>
+            <fieldset>
+                <legend>Podaj typ żartu</legend>
+                <input type="radio" name="typ" id="input_zw">zwykły
+                <input type="radio" name="typ" id="input_prog">dla programistów
+                <input type="radio" name="typ" id="input_dad">dad
+            </fieldset>
+
+            <label>Ile żartów mam wyświetlić?
+                <input type="number" id="ilosc" min="1" max="10" default="1" required>
+            </label>
+            <br>
+            <button id="btn">Wygeneruj</button>
+        </div>
+        <p id="joke"></p>
+        <script>
+            let joke = document.querySelector("#joke");
+            let btn = document.querySelector("#btn");
+            let inp_ilosc = document.querySelector("#ilosc");
+
+            btn.onclick = function () 
+            {
+                if(!inp_ilosc.checkValidity()) // checkValidity to metoda wbudowana w przeglądarkę
+                {
+                    joke.innerHTML = inp_ilosc.validationMessage;
+                }
+                else
+                {
+
+                    let type = "";
+                    if(document.querySelector("#input_prog").checked){
+                        type = "programming";
+                    } else if (document.querySelector("#input_dad").checked){
+                        type = "dad";
+                    } else if (document.querySelector("#input_zw").checked){
+                        type = "general";
+                    }
+                    var url;
+                    console.log(type);
+                    if(type != "")
+                    {
+                        url = `https://official-joke-api.appspot.com/jokes/${type}/ten`;
+                        console.log(url);
+                    }
+                    else
+                    {
+                        url = "https://official-joke-api.appspot.com/jokes/random";
+                    }
+                    joke.innerHTML = "";
+                    for(let i = 0; i < inp_ilosc.value; i++)
+                    {
+                        
+                        // joke.innerText += zbierz_dane(url) + "\n";
+                        fetch(url)
+                        .then((res)=>res.json())
+                        .then((dane)=>{
+                            console.log(dane);
+                            console.log(dane.stringify);
+                            joke.innerHTML += dane.setup + "\n" + dane.punchline + "<br>";
+                        }
+                            
+                        ).catch((err)=>console.error(err));
+                    }
+                }
+            }
+
+            function zbierz_dane(url)
+            {
+                let result;
+                fetch(url)
+                .then((res)=>res.json())
+                .then((dane)=>
+                    result = dane.setup + "\n" + dane.punchline + "\n"
+                ).catch((err)=>console.error(err));
+                return result;
+            }
+        </script>
+    </body>
+</html>
