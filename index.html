@@ -47,7 +47,7 @@
                     console.log(type);
                     if(type != "")
                     {
-                        url = `https://official-joke-api.appspot.com/jokes/${type}/ten`;
+                        url = `https://official-joke-api.appspot.com/jokes/${type}/random`;
                         console.log(url);
                     }
                     else
@@ -67,6 +67,21 @@
                             if(type == "")
                             {
                                 joke.innerHTML += dane.setup + "\n" + dane.punchline + "<br>";
+                            }
+                            else
+                            {
+                                if(type=="programming")
+                                {
+                                    url = "https://official-joke-api.appspot.com/jokes/programming/random";
+                                }
+                                else if(type=="dad")
+                                {
+                                    url = "https://official-joke-api.appspot.com/jokes/dad/random";
+                                }
+                                else if(type=="general")
+                                {
+                                    url = "https://official-joke-api.appspot.com/jokes/general/random";
+                                }
                             }
                         }
                             
