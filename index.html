@@ -55,6 +55,7 @@
                         .then((res)=>res.json())
                         .then((dane)=>{
                             console.log(dane);
+                            console.log(url);
                             // console.log(dane.stringify);
                             joke.innerHTML += dane.setup + "\n" + dane.punchline + "<br>";
                         }
