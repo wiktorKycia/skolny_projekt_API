@@ -63,8 +63,14 @@
                         .then((res)=>res.json())
                         .then((dane)=>{
                             console.log(dane);
-                            console.log(dane.stringify);
-                            joke.innerHTML += dane.setup + "\n" + dane.punchline + "<br>";
+                            if(type == "")
+                            {
+                                joke.innerHTML += dane.setup + "\n" + dane.punchline + "<br>";
+                            }
+                            else
+                            {
+                                joke.innerHTML += dane[0].setup + "\n" + dane[0].punchline + "<br>";
+                            }
                         }
                             
                         ).catch((err)=>console.error(err));
