@@ -57,7 +57,9 @@
                     joke.innerHTML = "";
                     for(let i = 0; i < inp_ilosc.value; i++)
                     {
-                        
+                        let flaga = true;
+                        while(flaga)
+                        {
                         // joke.innerText += zbierz_dane(url) + "\n";
                         fetch(url)
                         .then((res)=>res.json())
@@ -86,6 +88,7 @@
                         }
                             
                         ).catch((err)=>console.error(err));
+                        }
                     }
                 }
             }
